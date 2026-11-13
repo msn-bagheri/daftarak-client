@@ -5,7 +5,7 @@
       <!-- Section Header -->
       <div class="text-center max-w-2xl mx-auto mb-12">
         <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-          چرا ویتریکس برای فروشگاه شما ضروری است؟
+          چرا دفترک برای فروشگاه شما ضروری است؟
         </h2>
       </div>
 

@@ -10,7 +10,7 @@
             <Zap :size="18" class="fill-white" />
           </div>
           <div>
-            <span class="font-extrabold text-base text-slate-900 tracking-tight">ویتریکس (Vitrix)</span>
+            <span class="font-extrabold text-base text-slate-900 tracking-tight">دفترک (Daftarak)</span>
             <p class="text-xs text-slate-500">موتور هوشمند همگام‌سازی و قیمت‌گذاری چندکاناله</p>
           </div>
         </div>
@@ -19,7 +19,7 @@
         <div class="flex flex-wrap items-center justify-center gap-6 text-xs sm:text-sm font-medium">
           <a href="#features" class="hover:text-blue-600 transition-colors">امکانات پلتفرم</a>
           <a href="#channels" class="hover:text-blue-600 transition-colors">کانال‌های متصل</a>
-          <a href="#why-vitrix" class="hover:text-blue-600 transition-colors">مزایا و بازدهی</a>
+          <a href="#why-daftarak" class="hover:text-blue-600 transition-colors">مزایا و بازدهی</a>
           <button 
             type="button" 
             class="text-blue-600 hover:text-blue-700 font-bold transition-colors cursor-pointer"
@@ -33,7 +33,7 @@
 
       <!-- Copyright & Version -->
       <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-        <p>© تمامی حقوق محفوظ است — پلتفرم ابری ویتریکس</p>
+        <p>© تمامی حقوق محفوظ است — پلتفرم ابری دفترک</p>
         <div class="flex items-center gap-3">
           <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
           <span class="text-slate-500 font-medium">وضعیت سرویس‌ها: آنلاین و پایدار (۹۹.۹۸٪)</span>

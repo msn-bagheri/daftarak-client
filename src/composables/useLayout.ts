@@ -9,7 +9,7 @@ export interface TenantInfo {
   productCount: number;
 }
 
-const SIDEBAR_COLLAPSED_KEY = 'vitrix_sidebar_collapsed';
+const SIDEBAR_COLLAPSED_KEY = 'daftarak_sidebar_collapsed';
 
 const isSidebarCollapsed = ref<boolean>(
   localStorage.getItem(SIDEBAR_COLLAPSED_KEY) === 'true'

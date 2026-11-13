@@ -10,7 +10,7 @@ export interface UserProfile {
   date_joined?: string;
 }
 
-const STORAGE_KEY = 'vitrix_auth_user';
+const STORAGE_KEY = 'daftarak_auth_user';
 
 const getInitialUser = (): UserProfile | null => {
   try {

@@ -9,7 +9,7 @@
         </div>
         <div class="flex flex-col">
           <div class="flex items-center gap-2">
-            <span class="font-extrabold text-xl text-slate-900 tracking-tight">ویتریکس</span>
+            <span class="font-extrabold text-xl text-slate-900 tracking-tight">دفترک</span>
             <span class="text-[11px] px-2 py-0.5 rounded-full bg-gradient-to-r from-blue-50 to-pink-50 text-blue-700 border border-blue-200/70 font-semibold">
               همگام‌ساز هوشمند
             </span>
@@ -22,7 +22,7 @@
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
         <a href="#features" class="hover:text-blue-600 transition-colors">قابلیت‌ها</a>
         <a href="#channels" class="hover:text-blue-600 transition-colors">کانال‌های متصل</a>
-        <a href="#why-vitrix" class="hover:text-blue-600 transition-colors">چرا ویتریکس؟</a>
+        <a href="#why-daftarak" class="hover:text-blue-600 transition-colors">چرا دفترک؟</a>
         <a href="#cta" class="hover:text-pink-600 transition-colors font-semibold">آزمایش رایگان</a>
       </nav>
 

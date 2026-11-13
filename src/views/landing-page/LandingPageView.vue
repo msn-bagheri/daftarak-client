@@ -1,5 +1,5 @@
 <template>
-  <div class="vitrix-landing-root selection:bg-pink-500 selection:text-white antialiased" dir="rtl">
+  <div class="daftarak-landing-root selection:bg-pink-500 selection:text-white antialiased" dir="rtl">
     
     <!-- Top Navigation Bar -->
     <LandingNavbar
@@ -23,8 +23,8 @@
       <!-- Straightforward 3 Benefit Cards Grid -->
       <FeatureHighlights />
 
-      <!-- Why Vitrix & Real Business Impact Section -->
-      <WhyVitrixSection
+      <!-- Why Daftarak & Real Business Impact Section -->
+      <WhyDaftarakSection
         :metrics="trustMetrics"
         @navigate="handleNavigate"
         @open-auth="mode => $emit('open-auth', mode)"
@@ -54,7 +54,7 @@ import LandingNavbar from './components/LandingNavbar.vue';
 import LandingHero from './components/LandingHero.vue';
 import MarketplaceStrip from './components/MarketplaceStrip.vue';
 import FeatureHighlights from './components/FeatureHighlights.vue';
-import WhyVitrixSection from './components/WhyVitrixSection.vue';
+import WhyDaftarakSection from './components/WhyDaftarakSection.vue';
 import ConversionCta from './components/ConversionCta.vue';
 import LandingFooter from './components/LandingFooter.vue';
 

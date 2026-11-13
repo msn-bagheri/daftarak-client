@@ -1,5 +1,5 @@
 <template>
-  <section id="why-vitrix" class="py-20 bg-white relative">
+  <section id="why-daftarak" class="py-20 bg-white relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <!-- Section Header -->
@@ -8,7 +8,7 @@
           اثرات واقعی برای کسب‌وکار شما
         </span>
         <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mt-3 tracking-tight">
-          چرا فروشندگان موفق، فروش خود را به ویتریکس می‌سپارند؟
+          چرا فروشندگان موفق، فروش خود را به دفترک می‌سپارند؟
         </h2>
         <p class="mt-3 text-base text-slate-600">
           تفاوت بین کار دستی پراشتباه و اتوماسیون دقیق در اعداد زیر خلاصه می‌شود:
