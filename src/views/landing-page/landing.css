@@ -1,0 +1,113 @@
+/* ==========================================================================
+   Vitrix Modern Light Landing Page Styles (White, Blue & Pink Gradient)
+   ========================================================================== */
+
+.vitrix-landing-root {
+  min-height: 100vh;
+  background-color: #ffffff;
+  color: #0f172a;
+  font-family: 'Vazirmatn', system-ui, -apple-system, sans-serif;
+  direction: rtl;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Light ambient glow */
+.ambient-glow-blue {
+  position: absolute;
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, rgba(59, 130, 246, 0) 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ambient-glow-pink {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.12) 0%, rgba(236, 72, 153, 0) 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Text Gradients */
+.text-gradient-blue-pink {
+  background: linear-gradient(135deg, #2563eb 0%, #4f46e5 50%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-pink-violet {
+  background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 50%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Buttons */
+.btn-gradient-primary {
+  background: linear-gradient(135deg, #2563eb 0%, #4f46e5 50%, #ec4899 100%);
+  color: #ffffff;
+  font-weight: 700;
+  border-radius: 0.875rem;
+  padding: 0.875rem 1.75rem;
+  box-shadow: 0 10px 25px -5px rgba(236, 72, 153, 0.25), 0 8px 10px -6px rgba(37, 99, 235, 0.2);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-gradient-primary:hover {
+  background: linear-gradient(135deg, #1d4ed8 0%, #4338ca 50%, #db2777 100%);
+  box-shadow: 0 14px 30px -5px rgba(236, 72, 153, 0.35), 0 10px 14px -6px rgba(37, 99, 235, 0.3);
+  transform: translateY(-2px);
+}
+
+.btn-gradient-primary:active {
+  transform: translateY(0);
+}
+
+.btn-white-secondary {
+  background: #ffffff;
+  color: #1e293b;
+  font-weight: 600;
+  border-radius: 0.875rem;
+  padding: 0.875rem 1.75rem;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  cursor: pointer;
+}
+
+.btn-white-secondary:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #0f172a;
+  transform: translateY(-1px);
+}
+
+/* Glass & Card styles */
+.light-glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.light-glass-card:hover {
+  box-shadow: 0 20px 40px -15px rgba(37, 99, 235, 0.12), 0 0 0 1px rgba(236, 72, 153, 0.2);
+  transform: translateY(-3px);
+}

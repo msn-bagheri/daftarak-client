@@ -1,0 +1,54 @@
+<template>
+  <footer class="bg-white border-t border-slate-200/80 py-12 text-slate-600 text-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-slate-100">
+        
+        <!-- Brand Info -->
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-pink-500 flex items-center justify-center text-white shadow-sm">
+            <Zap :size="18" class="fill-white" />
+          </div>
+          <div>
+            <span class="font-extrabold text-base text-slate-900 tracking-tight">ویتریکس (Vitrix)</span>
+            <p class="text-xs text-slate-500">موتور هوشمند همگام‌سازی و قیمت‌گذاری چندکاناله</p>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="flex flex-wrap items-center justify-center gap-6 text-xs sm:text-sm font-medium">
+          <a href="#features" class="hover:text-blue-600 transition-colors">امکانات پلتفرم</a>
+          <a href="#channels" class="hover:text-blue-600 transition-colors">کانال‌های متصل</a>
+          <a href="#why-vitrix" class="hover:text-blue-600 transition-colors">مزایا و بازدهی</a>
+          <button 
+            type="button" 
+            class="text-blue-600 hover:text-blue-700 font-bold transition-colors cursor-pointer"
+            @click="$emit('navigate', 'workflow')"
+          >
+            ورود به پنل کاربری
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Copyright & Version -->
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+        <p>© تمامی حقوق محفوظ است — پلتفرم ابری ویتریکس</p>
+        <div class="flex items-center gap-3">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <span class="text-slate-500 font-medium">وضعیت سرویس‌ها: آنلاین و پایدار (۹۹.۹۸٪)</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+</template>
+
+<script setup lang="ts">
+import { Zap } from 'lucide-vue-next';
+import type { NavTab } from '../types';
+
+defineEmits<{
+  (e: 'navigate', tab: NavTab): void;
+}>();
+</script>
