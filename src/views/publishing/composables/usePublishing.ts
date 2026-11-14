@@ -9,8 +9,10 @@ import type {
   ProductOption,
 } from '../types';
 import { API_BASE_URL, getTenantHeaders } from '../../../config/api';
+import { useLayout } from '../../../composables/useLayout';
 
 export function usePublishing() {
+  const { setStoreName } = useLayout();
   const configs = ref<WooCommerceConfig[]>([]);
   const categoryMappings = ref<CategoryMapping[]>([]);
   const productMappings = ref<WooProductMapping[]>([]);
@@ -67,6 +69,9 @@ export function usePublishing() {
         body: JSON.stringify(cfg),
       });
       if (!res.ok) throw new Error('خطا در ذخیره اتصال فروشگاه ووکامرس');
+      if (cfg.store_name) {
+        setStoreName(cfg.store_name);
+      }
       await fetchConfigs();
       setFeedback('فروشگاه ووکامرس با موفقیت ذخیره شد.');
     } catch (err: any) {

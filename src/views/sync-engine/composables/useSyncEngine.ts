@@ -1,8 +1,10 @@
 import { ref, onMounted } from 'vue';
 import type { StoreConnection, PullCatalogResult } from '../types';
 import { getTenantHeaders } from '../../../config/api';
+import { useLayout } from '../../../composables/useLayout';
 
 export function useSyncEngine() {
+  const { setStoreName } = useLayout();
   const isTestingConnection = ref<boolean>(false);
   const testSuccessAlert = ref<string | null>(null);
   const isEditingWooModal = ref<boolean>(false);
@@ -43,10 +45,17 @@ export function useSyncEngine() {
       if (res.ok) {
         const data = await res.json();
         const conf = data.result;
-        if (conf && conf.base_url) {
-          wooConnection.value.siteUrl = conf.base_url;
-          wooConnection.value.details = `${conf.base_url} (ذخیره‌شده)`;
-          wooConnection.value.status = conf.enabled ? 'connected' : 'disconnected';
+        if (conf) {
+          if (conf.store_name) {
+            wooConnection.value.title = conf.store_name;
+            wooConnection.value.storeName = conf.store_name;
+            setStoreName(conf.store_name);
+          }
+          if (conf.base_url) {
+            wooConnection.value.siteUrl = conf.base_url;
+            wooConnection.value.details = `${conf.base_url} (ذخیره‌شده)`;
+            wooConnection.value.status = conf.enabled ? 'connected' : 'disconnected';
+          }
         }
       }
     } catch {
@@ -119,7 +128,8 @@ export function useSyncEngine() {
     }
   }
 
-  async function saveWooKeys(url: string, key: string, secret: string) {
+  async function saveWooKeys(url: string, key: string, secret: string, name?: string) {
+    const finalStoreName = (name || '').trim() || wooConnection.value.storeName || 'فروشگاه من';
     try {
       const res = await fetch('/api/publishing/configs/active/', {
         method: 'POST',
@@ -129,7 +139,7 @@ export function useSyncEngine() {
           base_url: url,
           consumer_key: key,
           consumer_secret: secret,
-          store_name: 'فروشگاه من',
+          store_name: finalStoreName,
         }),
       });
 
@@ -137,8 +147,11 @@ export function useSyncEngine() {
         wooConnection.value.siteUrl = url;
         wooConnection.value.consumerKey = key;
         wooConnection.value.consumerSecret = secret;
+        wooConnection.value.title = finalStoreName;
+        wooConnection.value.storeName = finalStoreName;
         wooConnection.value.status = 'connected';
         wooConnection.value.details = `${url} (متصل)`;
+        setStoreName(finalStoreName);
         testSuccessAlert.value = 'اطلاعات اتصال ووکامرس با موفقیت در سیستم ذخیره شد.';
       } else {
         testSuccessAlert.value = 'خطا در ذخیره اطلاعات ووکامرس در سرور';
@@ -147,8 +160,11 @@ export function useSyncEngine() {
       wooConnection.value.siteUrl = url;
       wooConnection.value.consumerKey = key;
       wooConnection.value.consumerSecret = secret;
+      wooConnection.value.title = finalStoreName;
+      wooConnection.value.storeName = finalStoreName;
       wooConnection.value.status = 'connected';
       wooConnection.value.details = `${url} (لوکال)`;
+      setStoreName(finalStoreName);
       testSuccessAlert.value = 'اطلاعات اتصال ثبت شد.';
     } finally {
       isEditingWooModal.value = false;

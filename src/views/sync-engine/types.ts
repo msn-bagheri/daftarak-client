@@ -10,6 +10,7 @@ export interface StoreConnection {
   consumerKey: string;
   consumerSecret: string;
   apiKey?: string;
+  storeName?: string;
 }
 
 export interface PullCatalogResult {

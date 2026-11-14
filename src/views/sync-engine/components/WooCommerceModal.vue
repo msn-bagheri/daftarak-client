@@ -17,6 +17,19 @@
       <form @submit.prevent="handleSave" class="space-y-4">
         <div>
           <label class="block text-xs font-bold text-slate-700 mb-1.5">
+            نام فروشگاه
+          </label>
+          <input 
+            v-model="storeName" 
+            type="text" 
+            placeholder="مثلاً: فروشگاه مرکزی من" 
+            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-xs text-slate-800 focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+            required
+          />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1.5">
             آدرس سایت
           </label>
           <input 
@@ -89,15 +102,16 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'close'): void;
-  (e: 'save', url: string, key: string, secret: string): void;
+  (e: 'save', url: string, key: string, secret: string, name: string): void;
 }>();
 
+const storeName = ref(props.connection.storeName || props.connection.title || 'فروشگاه ووکامرس من');
 const siteUrl = ref(props.connection.siteUrl);
 const consumerKey = ref(props.connection.consumerKey);
 const consumerSecret = ref(props.connection.consumerSecret);
 
 function handleSave() {
-  emit('save', siteUrl.value, consumerKey.value, consumerSecret.value);
+  emit('save', siteUrl.value, consumerKey.value, consumerSecret.value, storeName.value);
 }
 </script>
 

@@ -17,10 +17,13 @@ const isSidebarCollapsed = ref<boolean>(
 
 const isMobileMenuOpen = ref<boolean>(false);
 
+const STORE_NAME_KEY = 'daftarak_active_store_name';
+const savedStoreName = localStorage.getItem(STORE_NAME_KEY);
+
 const availableTenants = ref<TenantInfo[]>([
   {
     id: 'tenant-main',
-    name: 'فروشگاه مرکزی دیجی‌استایل',
+    name: savedStoreName || 'فروشگاه من',
     tier: 'enterprise',
     status: 'active',
     productCount: 14850,
@@ -57,6 +60,34 @@ watch(activeTenantId, (val) => {
   localStorage.setItem(APP_CONFIG.tenantStorageKey, val);
 });
 
+function setStoreName(name: string) {
+  if (!name || !name.trim()) return;
+  const trimmed = name.trim();
+  localStorage.setItem(STORE_NAME_KEY, trimmed);
+  const activeTenant = availableTenants.value.find(t => t.id === activeTenantId.value) || availableTenants.value[0];
+  if (activeTenant) {
+    activeTenant.name = trimmed;
+  }
+}
+
+async function syncStoreNameFromBackend() {
+  try {
+    const res = await fetch('/api/publishing/configs/active/', {
+      credentials: 'include',
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (data.result?.store_name) {
+        setStoreName(data.result.store_name);
+      }
+    }
+  } catch {
+    // Offline fallback
+  }
+}
+
+syncStoreNameFromBackend();
+
 export function useLayout() {
   function toggleSidebar() {
     isSidebarCollapsed.value = !isSidebarCollapsed.value;
@@ -89,5 +120,6 @@ export function useLayout() {
     toggleMobileMenu,
     closeMobileMenu,
     setActiveTenant,
+    setStoreName,
   };
 }
