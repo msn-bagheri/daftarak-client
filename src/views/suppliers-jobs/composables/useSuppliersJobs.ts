@@ -1,64 +1,79 @@
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import type { SupplierItem, ActivityLogItem, SupplierCategory } from '../types';
+
+const SUPPLIERS_STORAGE_KEY = 'daftarak_user_suppliers';
+const SUPPLIER_CATS_STORAGE_KEY = 'daftarak_supplier_categories';
+
+function getStoredSuppliers(): SupplierItem[] {
+  try {
+    const raw = localStorage.getItem(SUPPLIERS_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+function getStoredCategories(): Record<string, SupplierCategory[]> {
+  try {
+    const raw = localStorage.getItem(SUPPLIER_CATS_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
+}
 
 export function useSuppliersJobs() {
   const toastMessage = ref<string | null>(null);
   const isAddSupplierModalOpen = ref<boolean>(false);
   const activeSupplierForCategories = ref<SupplierItem | null>(null);
 
-  const supplierCategoriesMap = ref<Record<string, SupplierCategory[]>>({
-    'sup-hiska': [
-      { id: 'cat-h1', name: 'لوازم جانبی موبایل > کابل شارژ', productCount: 420, isSelected: true },
-      { id: 'cat-h2', name: 'لوازم جانبی موبایل > شارژر دیواری', productCount: 280, isSelected: true },
-      { id: 'cat-h3', name: 'صوتی > هدفون و هندزفری بلوتوث', productCount: 350, isSelected: true },
-      { id: 'cat-h4', name: 'پاوربانک و باتری', productCount: 150, isSelected: false },
-    ],
-    'sup-princely': [
-      { id: 'cat-p1', name: 'آرایشی و بهداشتی > سشوار حرفه‌ای', productCount: 310, isSelected: true },
-      { id: 'cat-p2', name: 'آرایشی و بهداشتی > ماشین اصلاح مو', productCount: 290, isSelected: true },
-      { id: 'cat-p3', name: 'زیبایی > اتو مو و حالت‌دهنده', productCount: 250, isSelected: false },
-    ],
-  });
-
-  const suppliers = ref<SupplierItem[]>([
-    {
-      id: 'sup-hiska',
-      name: 'هیسکا (Hiska)',
-      status: 'در حال بررسی دوره‌ای (هر ۲ ساعت یکبار)',
-      productCount: 1200,
-      lastChecked: '۱۵ دقیقه پیش',
-      isUpdating: false,
-    },
-    {
-      id: 'sup-princely',
-      name: 'پرنسلی (Princely)',
-      status: 'در حال بررسی دوره‌ای (هر ۲ ساعت یکبار)',
-      productCount: 850,
-      lastChecked: '۳۵ دقیقه پیش',
-      isUpdating: false,
-    },
-  ]);
+  const supplierCategoriesMap = ref<Record<string, SupplierCategory[]>>(getStoredCategories());
+  const suppliers = ref<SupplierItem[]>(getStoredSuppliers());
 
   const activityLogs = ref<ActivityLogItem[]>([
     {
-      id: 'log-1',
-      timestamp: 'امروز - ۱۲:۳۰',
-      message: '۴۲ کالا با موفقیت بروز شدند.',
-      level: 'success',
-    },
-    {
-      id: 'log-2',
-      timestamp: 'امروز - ۱۰:۱۵',
-      message: 'لیست قیمت هیسکا بدون تغییر بود.',
+      id: 'log-init',
+      timestamp: 'سیستم',
+      message: 'سامانه بررسی دوره‌ای و پایش خودکار تأمین‌کنندگان آماده به‌کار است.',
       level: 'info',
     },
-    {
-      id: 'log-3',
-      timestamp: 'دیروز - ۱۸:۰۰',
-      message: 'هشدار - ارتباط با هاست ووکامرس شما ۳۰ ثانیه قطع شد (تلاش مجدد انجام شد).',
-      level: 'warning',
-    },
   ]);
+
+  function persistSuppliers() {
+    try {
+      localStorage.setItem(SUPPLIERS_STORAGE_KEY, JSON.stringify(suppliers.value));
+      localStorage.setItem(SUPPLIER_CATS_STORAGE_KEY, JSON.stringify(supplierCategoriesMap.value));
+    } catch {
+      // Storage quota or disabled
+    }
+  }
+
+  async function loadSuppliersFromBackend() {
+    try {
+      const res = await fetch('/api/sources/shops/', { credentials: 'include' });
+      if (res.ok) {
+        const data = await res.json();
+        const shops = data.result || data.results || data || [];
+        if (Array.isArray(shops) && shops.length > 0) {
+          suppliers.value = shops.map((s: any) => ({
+            id: s.id || `sup-${Date.now()}`,
+            name: s.name,
+            status: s.status === 'active' ? 'در حال بررسی دوره‌ای (هر ۲ ساعت)' : 'غیرفعال',
+            productCount: s.product_count || 0,
+            lastChecked: s.last_successful_sync || 'متصل',
+            isUpdating: false,
+          }));
+          persistSuppliers();
+        }
+      }
+    } catch {
+      // Offline fallback
+    }
+  }
+
+  onMounted(() => {
+    loadSuppliersFromBackend();
+  });
 
   function triggerManualUpdate(supplierId: string) {
     const sup = suppliers.value.find(s => s.id === supplierId);
@@ -96,6 +111,7 @@ export function useSuppliersJobs() {
     supplierCategoriesMap.value[newId] = [
       { id: `cat-${newId}-1`, name: 'دسته عمومی محصولات', productCount: 0, isSelected: true }
     ];
+    persistSuppliers();
     isAddSupplierModalOpen.value = false;
     toastMessage.value = `تأمین‌کننده «${payload.name}» با موفقیت اضافه شد.`;
     activityLogs.value.unshift({
@@ -107,6 +123,19 @@ export function useSuppliersJobs() {
     setTimeout(() => {
       toastMessage.value = null;
     }, 4000);
+  }
+
+  function removeSupplier(supplierId: string) {
+    const idx = suppliers.value.findIndex(s => s.id === supplierId);
+    if (idx !== -1) {
+      const removed = suppliers.value.splice(idx, 1)[0];
+      delete supplierCategoriesMap.value[supplierId];
+      persistSuppliers();
+      toastMessage.value = `تأمین‌کننده «${removed.name}» حذف شد.`;
+      setTimeout(() => {
+        toastMessage.value = null;
+      }, 3000);
+    }
   }
 
   function openManageCategories(supplierId: string) {
@@ -152,6 +181,7 @@ export function useSuppliersJobs() {
     supplierCategoriesMap,
     triggerManualUpdate,
     addSupplier,
+    removeSupplier,
     openManageCategories,
     saveSupplierCategories,
   };

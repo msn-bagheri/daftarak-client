@@ -51,12 +51,21 @@
         <RefreshCw :size="14" :class="{ 'animate-spin': supplier.isUpdating }" />
         <span>{{ supplier.isUpdating ? 'در حال دریافت...' : 'بروزرسانی دستی' }}</span>
       </button>
+
+      <button
+        type="button"
+        title="حذف تأمین‌کننده"
+        class="p-2 rounded-xl border border-slate-200 hover:bg-rose-50 hover:text-rose-600 text-slate-400 transition-colors cursor-pointer"
+        @click="$emit('remove', supplier.id)"
+      >
+        <Trash2 :size="14" />
+      </button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { Truck, RefreshCw, FolderTree } from 'lucide-vue-next';
+import { Truck, RefreshCw, FolderTree, Trash2 } from 'lucide-vue-next';
 import { formatNumberFa } from '../../../utils/formatters';
 import type { SupplierItem } from '../types';
 
@@ -67,5 +76,6 @@ defineProps<{
 defineEmits<{
   (e: 'update', id: string): void;
   (e: 'manage-categories', id: string): void;
+  (e: 'remove', id: string): void;
 }>();
 </script>
