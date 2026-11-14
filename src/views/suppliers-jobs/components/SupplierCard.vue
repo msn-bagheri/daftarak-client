@@ -22,7 +22,7 @@
       <!-- Summary Row: ۱,۲۰۰ کالا دریافت شده | آخرین بررسی: ۱۵ دقیقه پیش -->
       <div class="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 border border-slate-100 my-4 text-xs">
         <div class="text-slate-600">
-          <span class="font-bold text-slate-900 font-mono">{{ formatNumberFa(supplier.productCount) }}</span>
+          <span class="font-bold text-slate-900">{{ formatNumberFa(supplier.productCount) }}</span>
           <span> کالا دریافت شده</span>
         </div>
         <div class="text-slate-400 font-medium">

@@ -22,14 +22,14 @@
     <div class="flex items-center justify-between sm:justify-start gap-6 w-full sm:w-4/12 border-t sm:border-t-0 border-slate-100 pt-3 sm:pt-0">
       <div>
         <div class="text-[11px] text-slate-400 font-medium">قیمت خرید عمده:</div>
-        <div class="text-xs font-bold text-slate-700 font-mono">
+        <div class="text-xs font-bold text-slate-700">
           {{ formatNumberFa(product.costPrice) }} تومان
         </div>
       </div>
 
       <div>
         <div class="text-[11px] text-slate-400 font-medium">قیمت فروش در سایت:</div>
-        <div class="text-sm font-black text-blue-700 font-mono">
+        <div class="text-sm font-black text-blue-700">
           {{ formatNumberFa(product.salePrice) }} تومان
         </div>
         <div class="text-[10px] text-emerald-600 font-bold">

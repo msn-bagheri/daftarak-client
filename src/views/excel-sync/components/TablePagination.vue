@@ -3,9 +3,9 @@
     <!-- Items range info -->
     <div class="text-slate-500 font-medium">
       <span v-if="totalItems > 0">
-        نمایش <strong class="text-slate-800 font-bold font-mono">{{ formatNumberFa(startIndex) }}</strong> تا
-        <strong class="text-slate-800 font-bold font-mono">{{ formatNumberFa(endIndex) }}</strong> از
-        <strong class="text-slate-800 font-bold font-mono">{{ formatNumberFa(totalItems) }}</strong> کالا
+        نمایش <strong class="text-slate-800 font-bold">{{ formatNumberFa(startIndex) }}</strong> تا
+        <strong class="text-slate-800 font-bold">{{ formatNumberFa(endIndex) }}</strong> از
+        <strong class="text-slate-800 font-bold">{{ formatNumberFa(totalItems) }}</strong> کالا
       </span>
       <span v-else>موردی یافت نشد</span>
     </div>

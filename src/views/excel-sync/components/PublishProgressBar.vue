@@ -44,9 +44,9 @@
     <div class="flex items-center justify-between mt-3 text-xs text-slate-600 flex-wrap gap-2">
       <div class="flex items-center gap-3">
         <span class="inline-flex items-center gap-1">
-          <strong class="font-bold text-slate-800 font-mono">{{ formatNumberFa(progress.current || 0) }}</strong>
+          <strong class="font-bold text-slate-800">{{ formatNumberFa(progress.current || 0) }}</strong>
           از
-          <strong class="font-bold text-slate-800 font-mono">{{ formatNumberFa(progress.total || 0) }}</strong>
+          <strong class="font-bold text-slate-800">{{ formatNumberFa(progress.total || 0) }}</strong>
           کالا پردازش شد
         </span>
       </div>

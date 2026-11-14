@@ -10,7 +10,7 @@
       </div>
       <div class="card-content">
         <span class="stat-label">محصولات مطابقت‌یافته (Matched)</span>
-        <strong class="stat-value font-mono">{{ formatNumber(report.matched_count) }} کالا</strong>
+        <strong class="stat-value">{{ formatNumber(report.matched_count) }} کالا</strong>
         <span class="stat-sub">از کل {{ formatNumber(report.total_rows) }} ردیف فایل اکسل</span>
       </div>
     </div>
@@ -25,7 +25,7 @@
       </div>
       <div class="card-content">
         <span class="stat-label">تغییر قیمت (Price Changed)</span>
-        <strong class="stat-value font-mono text-pink-600">{{ formatNumber(report.price_changed_count || 185) }} کالا</strong>
+        <strong class="stat-value text-pink-600">{{ formatNumber(report.price_changed_count || 185) }} کالا</strong>
         <span class="stat-sub">نیازمند به‌روزرسانی در مارکت‌پلیس‌ها</span>
       </div>
     </div>
@@ -40,7 +40,7 @@
       </div>
       <div class="card-content">
         <span class="stat-label">ناموجودها (Stock Updates)</span>
-        <strong class="stat-value font-mono text-amber-600">{{ formatNumber(report.out_of_stock_count || 22) }} کالا</strong>
+        <strong class="stat-value text-amber-600">{{ formatNumber(report.out_of_stock_count || 22) }} کالا</strong>
         <span class="stat-sub">صفر شدن موجودی در انبار مرکزی</span>
       </div>
     </div>

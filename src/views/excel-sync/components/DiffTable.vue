@@ -33,7 +33,7 @@
           @click="setFilter('all')"
         >
           <span>همه کالاها</span>
-          <span class="font-mono text-[11px] opacity-80">({{ formatNumberFa(allItems.length) }})</span>
+          <span class="text-[11px] opacity-80">({{ formatNumberFa(allItems.length) }})</span>
         </button>
 
         <button
@@ -46,7 +46,7 @@
           @click="setFilter('changed')"
         >
           <span>دارای تغییر</span>
-          <span class="font-mono text-[11px] opacity-80">({{ formatNumberFa(changedCount) }})</span>
+          <span class="text-[11px] opacity-80">({{ formatNumberFa(changedCount) }})</span>
         </button>
 
         <button
@@ -59,7 +59,7 @@
           @click="setFilter('created')"
         >
           <span>کالاهای جدید</span>
-          <span class="font-mono text-[11px] opacity-80">({{ formatNumberFa(createdCount) }})</span>
+          <span class="text-[11px] opacity-80">({{ formatNumberFa(createdCount) }})</span>
         </button>
 
         <button
@@ -72,7 +72,7 @@
           @click="setFilter('price_changed')"
         >
           <span>تغییر قیمت</span>
-          <span class="font-mono text-[11px] opacity-80">({{ formatNumberFa(priceChangedCount) }})</span>
+          <span class="text-[11px] opacity-80">({{ formatNumberFa(priceChangedCount) }})</span>
         </button>
 
         <button
@@ -85,7 +85,7 @@
           @click="setFilter('out_of_stock')"
         >
           <span>ناموجود</span>
-          <span class="font-mono text-[11px] opacity-80">({{ formatNumberFa(outOfStockCount) }})</span>
+          <span class="text-[11px] opacity-80">({{ formatNumberFa(outOfStockCount) }})</span>
         </button>
       </div>
     </div>
@@ -137,11 +137,11 @@
             <td class="py-3.5 px-5 whitespace-nowrap">
               <span 
                 v-if="item.diff?.changes?.regular_price" 
-                class="line-through text-slate-400 text-xs font-mono"
+                class="line-through text-slate-400 text-xs"
               >
                 {{ formatNumberFa(item.diff.changes.regular_price.old || '—') }} تومان
               </span>
-              <span v-else class="text-slate-500 text-xs font-mono">
+              <span v-else class="text-slate-500 text-xs">
                 {{ formatNumberFa(item.current_price || '—') }} تومان
               </span>
             </td>
@@ -150,11 +150,11 @@
             <td class="py-3.5 px-5 whitespace-nowrap">
               <span 
                 v-if="item.diff?.changes?.regular_price" 
-                class="font-bold text-emerald-600 text-sm font-mono"
+                class="font-bold text-emerald-600 text-sm"
               >
                 {{ formatNumberFa(item.diff.changes.regular_price.new) }} تومان
               </span>
-              <span v-else class="text-slate-700 text-xs font-mono">
+              <span v-else class="text-slate-700 text-xs">
                 {{ formatNumberFa(item.current_price || '—') }} تومان
               </span>
             </td>

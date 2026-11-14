@@ -4,7 +4,7 @@
     <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs flex items-center justify-between">
       <div>
         <div class="text-xs font-bold text-slate-500 mb-1">کالاهای هماهنگ</div>
-        <div class="text-2xl sm:text-3xl font-black text-emerald-600 font-mono">
+        <div class="text-2xl sm:text-3xl font-black text-emerald-600 tracking-tight">
           {{ formatNumberFa(metrics.syncedProducts) }}
         </div>
       </div>
@@ -17,8 +17,8 @@
     <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs flex items-center justify-between">
       <div>
         <div class="text-xs font-bold text-slate-500 mb-1">تغییرات ۲۴ ساعت گذشته</div>
-        <div class="text-2xl sm:text-3xl font-black text-blue-600 font-mono">
-          {{ formatNumberFa(metrics.changes24h) }} کالا
+        <div class="text-2xl sm:text-3xl font-black text-blue-600 tracking-tight">
+          {{ formatNumberFa(metrics.changes24h) }} <span class="text-base font-bold text-slate-500">کالا</span>
         </div>
       </div>
       <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
@@ -30,8 +30,8 @@
     <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs flex items-center justify-between">
       <div>
         <div class="text-xs font-bold text-slate-500 mb-1">خطاهای نیازمند بررسی</div>
-        <div class="text-2xl sm:text-3xl font-black text-rose-600 font-mono">
-          {{ formatNumberFa(metrics.errorsCount) }} مورد
+        <div class="text-2xl sm:text-3xl font-black text-rose-600 tracking-tight">
+          {{ formatNumberFa(metrics.errorsCount) }} <span class="text-base font-bold text-slate-500">مورد</span>
         </div>
       </div>
       <div class="w-12 h-12 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center">

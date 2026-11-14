@@ -90,10 +90,10 @@
     <!-- Live Calculation Sandbox -->
     <div class="p-4 rounded-xl bg-gradient-to-r from-blue-50/80 to-indigo-50/50 border border-blue-100 mb-6 flex items-center justify-between flex-wrap gap-2">
       <div class="text-xs text-slate-700 font-medium">
-        اگر قیمت عمده <strong class="font-mono text-slate-900">۱۰۰,۰۰۰ تومان</strong> باشد ➔
+        اگر قیمت عمده <strong class="font-black text-slate-900">۱۰۰,۰۰۰ تومان</strong> باشد ➔
       </div>
       <div class="text-xs text-blue-700 font-bold">
-        قیمت در سایت شما: <span class="font-mono text-sm text-blue-900 font-black">{{ formatNumberFa(calculatedPrice) }} تومان</span> خواهد بود.
+        قیمت در سایت شما: <span class="text-sm text-blue-900 font-black">{{ formatNumberFa(calculatedPrice) }} تومان</span> خواهد بود.
       </div>
     </div>
 
