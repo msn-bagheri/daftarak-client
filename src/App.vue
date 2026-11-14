@@ -3,30 +3,33 @@
     class="app-shell" 
     :class="{ 
       'sidebar-collapsed': isSidebarCollapsed,
-      'is-landing': currentTab === 'landing'
+      'is-landing': isPublicView
     }"
   >
-    <!-- Collapsible Side Menu across the platform (Hidden on Landing Page!) -->
+    <!-- Collapsible Side Menu across the platform (Hidden on Landing Page and Public Catalog!) -->
     <SideMenu 
-      v-if="currentTab !== 'landing'"
+      v-if="!isPublicView"
       :current-tab="currentTab" 
       @change-tab="setTab" 
     />
 
-    <div class="app-layout-wrapper" :class="{ 'landing-wrapper': currentTab === 'landing' }">
-      <!-- App Header for Dashboard (Hidden on Landing Page since Landing has its own Top Nav) -->
+    <div class="app-layout-wrapper" :class="{ 'landing-wrapper': isPublicView }">
+      <!-- App Header for Dashboard (Hidden on Landing & Public Catalog) -->
       <AppHeader 
-        v-if="currentTab !== 'landing'"
+        v-if="!isPublicView"
         :current-tab="currentTab" 
         @change-tab="setTab" 
         @open-auth="openAuth('login')"
       />
 
-      <main class="main-content" :class="{ 'landing-main': currentTab === 'landing' }">
+      <main class="main-content" :class="{ 'landing-main': isPublicView }">
         <LandingPageView 
           v-if="currentTab === 'landing'" 
           @navigate="setTab" 
           @open-auth="openAuth"
+        />
+        <PublicCatalogView 
+          v-else-if="currentTab === 'public-catalog'" 
         />
         <WorkflowView 
           v-else-if="currentTab === 'workflow'" 
@@ -39,9 +42,10 @@
         <SuppliersJobsView v-else-if="currentTab === 'suppliers'" />
         <PublishingView v-else-if="currentTab === 'publishing'" />
         <TransformationsView v-else-if="currentTab === 'transformations'" />
+        <ShowcaseSettingsView v-else-if="currentTab === 'showcase-settings'" />
       </main>
 
-      <footer v-if="currentTab !== 'landing'" class="app-footer">
+      <footer v-if="!isPublicView" class="app-footer">
         <div class="footer-content">
           <div class="footer-left">
             <span class="footer-brand font-black text-slate-800">دفتر<span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-pink-500 font-black">َک</span></span>
@@ -55,7 +59,7 @@
       </footer>
 
       <MobileNav 
-        v-if="currentTab !== 'landing'"
+        v-if="!isPublicView"
         :current-tab="currentTab" 
         @change-tab="setTab" 
       />
@@ -72,7 +76,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { APP_CONFIG } from './config/branding';
 import { useLayout } from './composables/useLayout';
 import { useAuth } from './composables/useAuth';
@@ -91,6 +95,8 @@ import SyncEngineView from './views/sync-engine/SyncEngineView.vue';
 import SuppliersJobsView from './views/suppliers-jobs/SuppliersJobsView.vue';
 import PublishingView from './views/publishing/PublishingView.vue';
 import TransformationsView from './views/transformations/TransformationsView.vue';
+import PublicCatalogView from './views/public-catalog/PublicCatalogView.vue';
+import ShowcaseSettingsView from './views/showcase-settings/ShowcaseSettingsView.vue';
 
 export type NavTab = 
   | 'landing' 
@@ -101,7 +107,9 @@ export type NavTab =
   | 'sync-engine' 
   | 'suppliers' 
   | 'publishing' 
-  | 'transformations';
+  | 'transformations'
+  | 'public-catalog'
+  | 'showcase-settings';
 
 const validTabs: NavTab[] = [
   'landing',
@@ -113,6 +121,8 @@ const validTabs: NavTab[] = [
   'suppliers',
   'publishing',
   'transformations',
+  'public-catalog',
+  'showcase-settings',
 ];
 
 const { isAuthenticated, checkAuth } = useAuth();
@@ -120,11 +130,13 @@ const { isAuthenticated, checkAuth } = useAuth();
 const getHashTab = (): NavTab => {
   const hash = window.location.hash.replace('#', '') as NavTab;
   if (!validTabs.includes(hash)) return 'landing';
-  if (hash !== 'landing' && !isAuthenticated.value) return 'landing';
+  if (hash === 'landing' || hash === 'public-catalog') return hash;
+  if (!isAuthenticated.value) return 'landing';
   return hash;
 };
 
 const currentTab = ref<NavTab>(getHashTab());
+const isPublicView = computed(() => currentTab.value === 'landing' || currentTab.value === 'public-catalog');
 const showAuthModal = ref<boolean>(false);
 const authModalMode = ref<'login' | 'register'>('register');
 const { isSidebarCollapsed } = useLayout();
@@ -136,7 +148,7 @@ function openAuth(mode: 'login' | 'register' = 'register') {
 
 function setTab(tab: NavTab) {
   // Guard dashboard/internal tabs: straight go to dashboard is blocked until sign up
-  if (tab !== 'landing' && !isAuthenticated.value) {
+  if (tab !== 'landing' && tab !== 'public-catalog' && !isAuthenticated.value) {
     openAuth('register');
     return;
   }

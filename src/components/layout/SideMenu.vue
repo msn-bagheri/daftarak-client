@@ -240,6 +240,7 @@ import {
   FolderTree,
   Store,
   Truck,
+  Globe,
 } from 'lucide-vue-next';
 import { useLayout } from '../../composables/useLayout';
 import type { NavTab } from '../../App.vue';
@@ -316,6 +317,15 @@ const generalItems: NavMenuItem[] = [
     description: 'پایش تغییرات و گزارش سیستم',
     icon: LayoutDashboard,
     color: 'blue',
+  },
+  {
+    tab: 'showcase-settings',
+    label: 'ویترین و کاتالوگ همکاران',
+    description: 'لینک اختصاصی سفارش‌گیری تلفنی',
+    icon: Globe,
+    color: 'pink',
+    badge: 'جدید',
+    badgeClass: 'badge-pink',
   },
   {
     tab: 'sync',

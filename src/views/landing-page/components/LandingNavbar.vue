@@ -12,10 +12,17 @@
       />
 
       <!-- Navigation Links -->
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+      <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600">
         <a href="#features" class="hover:text-blue-600 transition-colors">قابلیت‌ها</a>
         <a href="#channels" class="hover:text-blue-600 transition-colors">کانال‌های متصل</a>
         <a href="#why-daftarak" class="hover:text-blue-600 transition-colors">چرا دفترک؟</a>
+        <button 
+          type="button" 
+          class="hover:text-blue-600 transition-colors cursor-pointer text-slate-600 font-medium"
+          @click="$emit('navigate', 'public-catalog')"
+        >
+          ویترین همکاران
+        </button>
         <a href="#cta" class="hover:text-pink-600 transition-colors font-semibold">آزمایش رایگان</a>
       </nav>
 

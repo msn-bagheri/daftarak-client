@@ -54,6 +54,16 @@
       <button 
         type="button"
         class="nav-tab" 
+        :class="{ active: currentTab === 'showcase-settings' }"
+        @click="$emit('change-tab', 'showcase-settings')"
+      >
+        <Globe :size="16" />
+        <span>ویترین من</span>
+      </button>
+
+      <button 
+        type="button"
+        class="nav-tab" 
         :class="{ active: currentTab === 'workflow' }"
         @click="$emit('change-tab', 'workflow')"
       >
@@ -83,6 +93,7 @@ import {
   FolderTree,
   Store,
   Truck,
+  Globe,
 } from 'lucide-vue-next';
 import type { NavTab } from '../../App.vue';
 

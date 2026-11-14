@@ -98,6 +98,8 @@ const moduleMetaMap: Record<NavTab, { title: string; badge: string }> = {
   suppliers: { title: 'تأمین‌کنندگان', badge: 'عمده‌فروش' },
   publishing: { title: 'انتشار کالاها', badge: 'ارسال' },
   transformations: { title: 'فرمول قیمت و سود', badge: 'سود و قیمت' },
+  'public-catalog': { title: 'ویترین و کاتالوگ عمومی', badge: 'کاتالوگ' },
+  'showcase-settings': { title: 'تنظیمات ویترین و کاتالوگ', badge: 'ویترین همکار' },
 };
 
 const currentModuleMeta = computed(() => {

@@ -7,7 +7,9 @@ export type NavTab =
   | 'sync-engine' 
   | 'suppliers' 
   | 'publishing' 
-  | 'transformations';
+  | 'transformations'
+  | 'public-catalog'
+  | 'showcase-settings';
 
 export interface FeatureItem {
   id: string;
