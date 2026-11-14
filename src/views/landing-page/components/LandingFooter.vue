@@ -5,15 +5,12 @@
       <div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-slate-100">
         
         <!-- Brand Info -->
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-pink-500 flex items-center justify-center text-white shadow-sm">
-            <Zap :size="18" class="fill-white" />
-          </div>
-          <div>
-            <span class="font-extrabold text-base text-slate-900 tracking-tight">دفترک (Daftarak)</span>
-            <p class="text-xs text-slate-500">موتور هوشمند همگام‌سازی و قیمت‌گذاری چندکاناله</p>
-          </div>
-        </div>
+        <DaftarakLogo 
+          size="sm" 
+          variant="horizontal" 
+          show-subtitle 
+          tagline="موتور هوشمند همگام‌سازی و قیمت‌گذاری چندکاناله" 
+        />
 
         <!-- Quick Links -->
         <div class="flex flex-wrap items-center justify-center gap-6 text-xs sm:text-sm font-medium">
@@ -45,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import { Zap } from 'lucide-vue-next';
+import DaftarakLogo from '../../../components/brand/DaftarakLogo.vue';
 import type { NavTab } from '../types';
 
 defineEmits<{

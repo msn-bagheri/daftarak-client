@@ -44,7 +44,7 @@
       <footer v-if="currentTab !== 'landing'" class="app-footer">
         <div class="footer-content">
           <div class="footer-left">
-            <span class="footer-brand">{{ APP_CONFIG.nameFa }}</span>
+            <span class="footer-brand font-black text-slate-800">دفتر<span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-pink-500 font-black">َک</span></span>
             <span class="footer-dot">•</span>
             <span class="footer-tagline">{{ APP_CONFIG.taglineFa }}</span>
           </div>

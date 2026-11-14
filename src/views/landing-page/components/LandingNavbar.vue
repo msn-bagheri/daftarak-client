@@ -3,20 +3,14 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       
       <!-- Logo & Brand Badge -->
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-pink-500 flex items-center justify-center shadow-md shadow-pink-500/20">
-          <Zap :size="22" class="text-white fill-white" />
-        </div>
-        <div class="flex flex-col">
-          <div class="flex items-center gap-2">
-            <span class="font-extrabold text-xl text-slate-900 tracking-tight">دفترک</span>
-            <span class="text-[11px] px-2 py-0.5 rounded-full bg-gradient-to-r from-blue-50 to-pink-50 text-blue-700 border border-blue-200/70 font-semibold">
-              همگام‌ساز هوشمند
-            </span>
-          </div>
-          <span class="text-[11px] text-slate-400 font-medium">هماهنگی خودکار ووکامرس</span>
-        </div>
-      </div>
+      <DaftarakLogo 
+        size="md" 
+        variant="horizontal" 
+        show-badge 
+        badge-text="همگام‌ساز هوشمند" 
+        show-subtitle 
+        tagline="هماهنگی خودکار ووکامرس" 
+      />
 
       <!-- Navigation Links -->
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
@@ -123,8 +117,8 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
+import DaftarakLogo from '../../../components/brand/DaftarakLogo.vue';
 import {
-  Zap,
   ArrowLeft,
   User,
   ChevronDown,

@@ -19,24 +19,16 @@
       <!-- Brand & Header -->
       <!-- Brand & Header -->
       <div v-if="!isSidebarCollapsed" class="sidebar-header">
-        <div 
-          class="brand-area" 
-          role="button"
-          tabindex="0"
-          @click="navigateTo('workflow')"
-          @keydown.enter="navigateTo('workflow')"
-        >
-          <div class="brand-avatar">
-            <Sparkles :size="20" class="brand-sparkle" />
-          </div>
-          <div class="brand-details">
-            <div class="brand-name-row">
-              <span class="brand-title">{{ APP_CONFIG.nameFa }}</span>
-              <span class="badge badge-pink tier-pill">نسخه ابری</span>
-            </div>
-            <span class="brand-sub">{{ APP_CONFIG.taglineFa }}</span>
-          </div>
-        </div>
+        <DaftarakLogo 
+          size="md" 
+          variant="horizontal" 
+          show-badge 
+          badge-text="نسخه ابری" 
+          show-subtitle 
+          tagline="پلتفرم کاتالوگ و انبار" 
+          clickable 
+          @click="navigateTo('workflow')" 
+        />
 
         <!-- Desktop Collapse Button -->
         <button 
@@ -69,9 +61,7 @@
           aria-label="گسترش منوی ناوبری"
           @click="toggleSidebar"
         >
-          <div class="brand-avatar mini-avatar">
-            <Sparkles :size="18" class="brand-sparkle" />
-          </div>
+          <DaftarakLogo size="sm" variant="icon-only" />
           <span class="mini-expand-indicator">
             <PanelRightOpen :size="11" />
           </span>
@@ -110,12 +100,58 @@
       <!-- Navigation Links List -->
       <nav class="sidebar-nav">
         <div v-if="!isSidebarCollapsed" class="nav-section-label">
-          <span>بخش‌های سیستم</span>
+          <span>مراحل گام‌به‌گام راه‌اندازی</span>
         </div>
 
         <ul class="nav-list">
           <li 
-            v-for="item in navItems" 
+            v-for="item in stepItems" 
+            :key="item.tab"
+            class="nav-item"
+          >
+            <button 
+              type="button"
+              class="nav-btn"
+              :class="{ 'is-active': currentTab === item.tab }"
+              :title="isSidebarCollapsed ? item.label : undefined"
+              @click="navigateTo(item.tab)"
+            >
+              <div class="nav-icon-wrap" :class="`icon-theme-${item.color}`">
+                <component :is="item.icon" :size="18" />
+              </div>
+
+              <div v-show="!isSidebarCollapsed" class="nav-label-group">
+                <span class="nav-title">{{ item.label }}</span>
+                <span class="nav-desc">{{ item.description }}</span>
+              </div>
+
+              <span 
+                v-if="!isSidebarCollapsed && item.badge" 
+                class="badge nav-badge"
+                :class="item.badgeClass || 'badge-neutral'"
+              >
+                {{ item.badge }}
+              </span>
+
+              <!-- Active highlight bar -->
+              <span v-if="currentTab === item.tab" class="active-indicator-bar"></span>
+            </button>
+
+            <!-- Collapsed Floating Flyout Tooltip -->
+            <div v-if="isSidebarCollapsed" class="collapsed-nav-tooltip desktop-only">
+              <span class="tooltip-title">{{ item.label }}</span>
+              <span class="tooltip-desc">{{ item.description }}</span>
+            </div>
+          </li>
+        </ul>
+
+        <div v-if="!isSidebarCollapsed" class="nav-section-label mt-4">
+          <span>پایش و ابزارها</span>
+        </div>
+
+        <ul class="nav-list">
+          <li 
+            v-for="item in generalItems" 
             :key="item.tab"
             class="nav-item"
           >
@@ -195,8 +231,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import DaftarakLogo from '../brand/DaftarakLogo.vue';
 import {
-  Sparkles,
   FileSpreadsheet,
   Package,
   Calculator,
@@ -208,7 +244,6 @@ import {
   Store,
   Truck,
 } from 'lucide-vue-next';
-import { APP_CONFIG } from '../../config/branding';
 import { useLayout } from '../../composables/useLayout';
 import type { NavTab } from '../../App.vue';
 
@@ -239,20 +274,51 @@ const {
   closeMobileMenu,
 } = useLayout();
 
-const navItems: NavMenuItem[] = [
+const stepItems: NavMenuItem[] = [
   {
-    tab: 'workflow',
-    label: 'میز کار',
-    description: 'وضعیت کلی و مراحل هماهنگی',
-    icon: LayoutDashboard,
+    tab: 'sync-engine',
+    label: '۱. اتصال و سینک فروشگاه',
+    description: 'ووکامرس یا دیجی‌کالای مقصد',
+    icon: Store,
     color: 'blue',
   },
   {
-    tab: 'catalog',
-    label: 'لیست کالاها',
-    description: 'مشاهده و مدیریت کالاها',
-    icon: Package,
+    tab: 'suppliers',
+    label: '۲. اتصال تأمین‌کنندگان',
+    description: 'معرفی سایت‌های عمده‌فروشی',
+    icon: Truck,
     color: 'purple',
+  },
+  {
+    tab: 'category-mapper',
+    label: '۳. تطبیق دسته‌بندی‌ها',
+    description: 'متصل کردن دسته‌های کالا',
+    icon: FolderTree,
+    color: 'amber',
+  },
+  {
+    tab: 'transformations',
+    label: '۴. فرمول سود و قیمت',
+    description: 'درصد سود و رندسازی تومان',
+    icon: Calculator,
+    color: 'pink',
+  },
+  {
+    tab: 'catalog',
+    label: '۵. انبار و انتشار کالاها',
+    description: 'بررسی قیمت نهایی و انتشار',
+    icon: Package,
+    color: 'green',
+  },
+];
+
+const generalItems: NavMenuItem[] = [
+  {
+    tab: 'workflow',
+    label: 'میز کار و وضعیت زنده',
+    description: 'پایش تغییرات و گزارش سیستم',
+    icon: LayoutDashboard,
+    color: 'blue',
   },
   {
     tab: 'sync',
@@ -260,34 +326,6 @@ const navItems: NavMenuItem[] = [
     description: 'بارگذاری فایل اکسل عمده‌فروش',
     icon: FileSpreadsheet,
     color: 'green',
-  },
-  {
-    tab: 'category-mapper',
-    label: 'دسته‌بندی‌ها',
-    description: 'تطبیق هوشمند دسته‌های کالا',
-    icon: FolderTree,
-    color: 'amber',
-  },
-  {
-    tab: 'transformations',
-    label: 'فرمول قیمت و سود',
-    description: 'درصد سود و رندسازی قیمت',
-    icon: Calculator,
-    color: 'pink',
-  },
-  {
-    tab: 'sync-engine',
-    label: 'اتصال فروشگاه‌ها',
-    description: 'ووکامرس و دیجی‌کالا',
-    icon: Store,
-    color: 'blue',
-  },
-  {
-    tab: 'suppliers',
-    label: 'تأمین‌کنندگان',
-    description: 'دریافت خودکار از عمده‌فروش',
-    icon: Truck,
-    color: 'purple',
   },
 ];
 

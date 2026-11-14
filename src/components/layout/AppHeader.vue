@@ -12,17 +12,12 @@
           <Menu :size="19" />
         </button>
 
-        <div class="brand" @click="$emit('change-tab', 'workflow')">
-          <div class="brand-icon">
-            <Sparkles :size="18" />
-          </div>
-          <div class="brand-info">
-            <div class="brand-title-row">
-              <h1 class="brand-title">{{ APP_CONFIG.nameFa }}</h1>
-            </div>
-            <span class="brand-tagline">{{ APP_CONFIG.taglineFa }}</span>
-          </div>
-        </div>
+        <DaftarakLogo 
+          size="sm" 
+          variant="horizontal" 
+          clickable
+          @click="$emit('change-tab', 'workflow')" 
+        />
 
         <!-- Active Module Context Pill -->
         <div class="active-module-pill">
@@ -75,8 +70,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { Sparkles, Menu, Store, User, LogOut } from 'lucide-vue-next';
-import { APP_CONFIG } from '../../config/branding';
+import { Menu, Store, User, LogOut } from 'lucide-vue-next';
+import DaftarakLogo from '../brand/DaftarakLogo.vue';
 import { useLayout } from '../../composables/useLayout';
 import { useAuth } from '../../composables/useAuth';
 import type { NavTab } from '../../App.vue';

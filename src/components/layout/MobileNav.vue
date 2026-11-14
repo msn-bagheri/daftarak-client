@@ -4,6 +4,56 @@
       <button 
         type="button"
         class="nav-tab" 
+        :class="{ active: currentTab === 'sync-engine' }"
+        @click="$emit('change-tab', 'sync-engine')"
+      >
+        <Store :size="16" />
+        <span>۱. اتصال فروشگاه</span>
+      </button>
+
+      <button 
+        type="button"
+        class="nav-tab" 
+        :class="{ active: currentTab === 'suppliers' }"
+        @click="$emit('change-tab', 'suppliers')"
+      >
+        <Truck :size="16" />
+        <span>۲. تأمین‌کنندگان</span>
+      </button>
+
+      <button 
+        type="button"
+        class="nav-tab" 
+        :class="{ active: currentTab === 'category-mapper' }"
+        @click="$emit('change-tab', 'category-mapper')"
+      >
+        <FolderTree :size="16" />
+        <span>۳. دسته‌بندی‌ها</span>
+      </button>
+
+      <button 
+        type="button"
+        class="nav-tab" 
+        :class="{ active: currentTab === 'transformations' }"
+        @click="$emit('change-tab', 'transformations')"
+      >
+        <Calculator :size="16" />
+        <span>۴. فرمول سود</span>
+      </button>
+
+      <button 
+        type="button"
+        class="nav-tab" 
+        :class="{ active: currentTab === 'catalog' }"
+        @click="$emit('change-tab', 'catalog')"
+      >
+        <Package :size="16" />
+        <span>۵. انبار کالاها</span>
+      </button>
+
+      <button 
+        type="button"
+        class="nav-tab" 
         :class="{ active: currentTab === 'workflow' }"
         @click="$emit('change-tab', 'workflow')"
       >
@@ -14,61 +64,11 @@
       <button 
         type="button"
         class="nav-tab" 
-        :class="{ active: currentTab === 'catalog' }"
-        @click="$emit('change-tab', 'catalog')"
-      >
-        <Package :size="16" />
-        <span>لیست کالاها</span>
-      </button>
-
-      <button 
-        type="button"
-        class="nav-tab" 
         :class="{ active: currentTab === 'sync' }"
         @click="$emit('change-tab', 'sync')"
       >
         <FileSpreadsheet :size="16" />
-        <span>آپدیت با اکسل</span>
-      </button>
-
-      <button 
-        type="button"
-        class="nav-tab" 
-        :class="{ active: currentTab === 'category-mapper' }"
-        @click="$emit('change-tab', 'category-mapper')"
-      >
-        <FolderTree :size="16" />
-        <span>دسته‌بندی‌ها</span>
-      </button>
-
-      <button 
-        type="button"
-        class="nav-tab" 
-        :class="{ active: currentTab === 'transformations' }"
-        @click="$emit('change-tab', 'transformations')"
-      >
-        <Calculator :size="16" />
-        <span>فرمول قیمت و سود</span>
-      </button>
-
-      <button 
-        type="button"
-        class="nav-tab" 
-        :class="{ active: currentTab === 'sync-engine' }"
-        @click="$emit('change-tab', 'sync-engine')"
-      >
-        <Store :size="16" />
-        <span>اتصال فروشگاه‌ها</span>
-      </button>
-
-      <button 
-        type="button"
-        class="nav-tab" 
-        :class="{ active: currentTab === 'suppliers' }"
-        @click="$emit('change-tab', 'suppliers')"
-      >
-        <Truck :size="16" />
-        <span>تأمین‌کنندگان</span>
+        <span>آپدیت اکسل</span>
       </button>
     </div>
   </nav>
