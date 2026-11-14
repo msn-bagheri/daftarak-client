@@ -36,7 +36,7 @@
 
         <!-- User Profile & Auth Status -->
         <div class="user-auth-pill">
-          <div v-if="isAuthenticated && currentUser" class="user-info-row">
+          <div v-if="isAuthenticated && currentUser" class="user-info-row" :title="`کاربر فعال: ${currentUser.username}`">
             <User :size="14" class="text-pink" />
             <span class="user-name">{{ currentUser.username }}</span>
             <button 
@@ -337,6 +337,13 @@ async function handleLogout() {
 .user-name {
   font-weight: 700;
   color: var(--text-main);
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .user-name {
+    display: inline;
+  }
 }
 
 .header-logout-btn {

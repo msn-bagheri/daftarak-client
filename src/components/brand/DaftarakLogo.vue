@@ -131,4 +131,28 @@ const persianTextSize = computed(() => {
 .persian-brand-badge {
   font-family: 'Vazirmatn', system-ui, -apple-system, sans-serif;
 }
+
+@media (max-width: 480px) {
+  .daftarak-logo-img-wrap {
+    height: 28px !important;
+  }
+  .persian-brand-badge {
+    padding: 2px 7px !important;
+  }
+  .persian-name-text {
+    font-size: 11px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .daftarak-logo-img-wrap {
+    height: 24px !important;
+  }
+  .persian-brand-badge {
+    padding: 1.5px 5px !important;
+  }
+  .persian-name-text {
+    font-size: 10px !important;
+  }
+}
 </style>

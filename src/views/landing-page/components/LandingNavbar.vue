@@ -1,6 +1,6 @@
 <template>
   <header class="sticky top-0 z-50 w-full transition-all duration-300 backdrop-blur-xl bg-white/85 border-b border-slate-200/80 shadow-xs">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2">
       
       <!-- Logo & Brand Badge -->
       <DaftarakLogo 
@@ -38,17 +38,18 @@
             <!-- User Badge Dropdown Button -->
             <button
               type="button"
-              class="flex items-center gap-2 px-3 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 transition-all text-slate-800 text-xs font-bold shadow-2xs cursor-pointer select-none"
+              class="flex items-center gap-1.5 p-1.5 sm:px-3 sm:py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 transition-all text-slate-800 text-xs font-bold shadow-2xs cursor-pointer select-none"
               :class="{ 'border-blue-400 ring-2 ring-blue-500/10': isDropdownOpen }"
+              :title="currentUser.username"
               @click="toggleDropdown"
             >
-              <div class="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
+              <div class="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-bold shrink-0">
                 <User :size="15" />
               </div>
-              <span class="max-w-[120px] truncate">{{ currentUser.username }}</span>
+              <span class="hidden sm:inline max-w-[120px] truncate">{{ currentUser.username }}</span>
               <ChevronDown 
                 :size="14" 
-                class="text-slate-400 transition-transform duration-200" 
+                class="hidden sm:inline text-slate-400 transition-transform duration-200" 
                 :class="{ 'rotate-180': isDropdownOpen }" 
               />
             </button>
@@ -101,11 +102,12 @@
 
           <button
             type="button"
-            class="btn-gradient-primary text-sm !py-2.5 !px-5 cursor-pointer"
+            class="btn-gradient-primary text-xs sm:text-sm !py-2 sm:!py-2.5 !px-3 sm:!px-5 cursor-pointer shadow-md shadow-pink-500/15"
             @click="$emit('open-auth', 'register')"
           >
-            <span>شروع رایگان</span>
-            <ArrowLeft :size="16" />
+            <span class="hidden sm:inline">شروع رایگان</span>
+            <span class="sm:hidden">ورود / ثبت‌نام</span>
+            <ArrowLeft :size="15" class="hidden sm:inline" />
           </button>
         </template>
       </div>

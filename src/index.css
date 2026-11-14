@@ -60,15 +60,9 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-body {
-  font-family: var(--font-family);
+html, body, #app {
+  font-family: var(--font-family) !important;
   background-color: var(--bg-app);
-  background-image: 
-    radial-gradient(at 10% 10%, rgba(37, 99, 235, 0.06) 0px, transparent 40%),
-    radial-gradient(at 90% 15%, rgba(236, 72, 153, 0.06) 0px, transparent 40%),
-    radial-gradient(at 50% 60%, rgba(248, 250, 252, 0.9) 0px, transparent 80%),
-    radial-gradient(at 80% 85%, rgba(139, 92, 246, 0.05) 0px, transparent 45%);
-  background-attachment: fixed;
   color: var(--text-main);
   direction: rtl;
   text-align: right;
@@ -76,6 +70,39 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   font-size: 15px;
+}
+
+body {
+  background-image: 
+    radial-gradient(at 10% 10%, rgba(37, 99, 235, 0.06) 0px, transparent 40%),
+    radial-gradient(at 90% 15%, rgba(236, 72, 153, 0.06) 0px, transparent 40%),
+    radial-gradient(at 50% 60%, rgba(248, 250, 252, 0.9) 0px, transparent 80%),
+    radial-gradient(at 80% 85%, rgba(139, 92, 246, 0.05) 0px, transparent 45%);
+  background-attachment: fixed;
+}
+
+/* Force all form controls, typography and interactive elements to strictly inherit Vazirmatn */
+button,
+input,
+optgroup,
+select,
+textarea,
+h1, h2, h3, h4, h5, h6,
+p, span, a, label, li,
+table, th, td,
+.font-sans,
+[class*="font-sans"] {
+  font-family: var(--font-family) !important;
+}
+
+/* Monospace only for code, SKU, JSON, logs */
+code,
+kbd,
+samp,
+pre,
+.font-mono,
+[class*="font-mono"] {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
 }
 
 /* Glassmorphism utility */
