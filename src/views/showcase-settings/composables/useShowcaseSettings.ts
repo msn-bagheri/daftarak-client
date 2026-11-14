@@ -15,6 +15,10 @@ const INITIAL_PROFILE: ShowcaseProfileData = {
   showPrices: true,
   allowInquiryList: true,
   minOrderTotal: 1000000,
+  acceptsCash: true,
+  acceptsCheque: true,
+  acceptsCredit: true,
+  shippingNotes: 'ارسال با باربری‌های معتبر (وطن، پیشتاز)، تیپاکس و پیک در تهران',
 };
 
 export function useShowcaseSettings() {

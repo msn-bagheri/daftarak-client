@@ -44,6 +44,7 @@
         <PublishingView v-else-if="currentTab === 'publishing'" />
         <TransformationsView v-else-if="currentTab === 'transformations'" />
         <ShowcaseSettingsView v-else-if="currentTab === 'showcase-settings'" />
+        <OrdersView v-else-if="currentTab === 'orders'" />
       </main>
 
       <footer v-if="!isPublicView" class="app-footer">
@@ -107,6 +108,7 @@ import PublishingView from './views/publishing/PublishingView.vue';
 import TransformationsView from './views/transformations/TransformationsView.vue';
 import PublicCatalogView from './views/public-catalog/PublicCatalogView.vue';
 import ShowcaseSettingsView from './views/showcase-settings/ShowcaseSettingsView.vue';
+import OrdersView from './views/orders/OrdersView.vue';
 
 export type NavTab = 
   | 'landing' 
@@ -119,7 +121,8 @@ export type NavTab =
   | 'publishing' 
   | 'transformations'
   | 'public-catalog'
-  | 'showcase-settings';
+  | 'showcase-settings'
+  | 'orders';
 
 const validTabs: NavTab[] = [
   'landing',
@@ -133,6 +136,7 @@ const validTabs: NavTab[] = [
   'transformations',
   'public-catalog',
   'showcase-settings',
+  'orders',
 ];
 
 const { isAuthenticated, checkAuth } = useAuth();

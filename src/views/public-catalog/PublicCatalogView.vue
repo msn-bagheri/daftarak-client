@@ -105,6 +105,7 @@
       :show-prices="profile.showPrices"
       :supplier-phone="profile.phone"
       :whatsapp-number="profile.whatsappNumber"
+      :profile="profile"
       :generate-inquiry-text="generateInquiryText"
       @close="isInquiryDrawerOpen = false"
       @update-qty="updateInquiryQty"

@@ -5,6 +5,16 @@
       <button 
         type="button"
         class="nav-tab" 
+        :class="{ active: currentTab === 'orders' }"
+        @click="$emit('change-tab', 'orders')"
+      >
+        <ClipboardList :size="16" />
+        <span>سفارش‌ها</span>
+      </button>
+
+      <button 
+        type="button"
+        class="nav-tab" 
         :class="{ active: currentTab === 'showcase-settings' }"
         @click="$emit('change-tab', 'showcase-settings')"
       >
@@ -128,6 +138,7 @@ import {
   Store,
   Truck,
   Globe,
+  ClipboardList,
 } from 'lucide-vue-next';
 import { useUserRole } from '../../composables/useUserRole';
 import type { NavTab } from '../../App.vue';

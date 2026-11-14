@@ -12,6 +12,10 @@ export interface SupplierProfile {
   allowInquiryList: boolean;
   minOrderTotal?: number;
   workingHours?: string;
+  acceptsCash?: boolean;
+  acceptsCheque?: boolean;
+  acceptsCredit?: boolean;
+  shippingNotes?: string;
 }
 
 export interface CatalogProduct {
@@ -38,4 +42,3 @@ export interface OrderInquiryItem {
 }
 
 export type SortOption = 'newest' | 'price-asc' | 'price-desc' | 'popular';
-

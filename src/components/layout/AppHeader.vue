@@ -135,6 +135,7 @@ const moduleMetaMap: Record<NavTab, { title: string; badge: string }> = {
   transformations: { title: 'فرمول قیمت و سود', badge: 'سود و قیمت' },
   'public-catalog': { title: 'ویترین و کاتالوگ عمومی', badge: 'کاتالوگ' },
   'showcase-settings': { title: 'تنظیمات ویترین و کاتالوگ', badge: 'ویترین همکار' },
+  orders: { title: 'سفارش‌ها و پیش‌فاکتورها', badge: 'سفارشات B2B' },
 };
 
 const currentModuleMeta = computed(() => {

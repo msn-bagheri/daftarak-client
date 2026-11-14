@@ -10,5 +10,9 @@ export interface ShowcaseProfileData {
   showPrices: boolean;
   allowInquiryList: boolean;
   minOrderTotal?: number;
+  // B2B Settlement & Shipping Preferences
+  acceptsCash: boolean;
+  acceptsCheque: boolean;
+  acceptsCredit: boolean;
+  shippingNotes?: string;
 }
-

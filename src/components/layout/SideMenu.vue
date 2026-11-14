@@ -301,6 +301,7 @@ import {
   Store,
   Truck,
   Globe,
+  ClipboardList,
 } from 'lucide-vue-next';
 import { useLayout } from '../../composables/useLayout';
 import { useUserRole } from '../../composables/useUserRole';
@@ -336,6 +337,15 @@ const {
 const { isSupplier } = useUserRole();
 
 const supplierMenuItems: NavMenuItem[] = [
+  {
+    tab: 'orders',
+    label: 'سفارش‌ها و پیش‌فاکتورها',
+    description: 'درخواست‌های تسویه دفتری، چک و نقد',
+    icon: ClipboardList,
+    color: 'amber',
+    badge: 'جدید',
+    badgeClass: 'badge-amber',
+  },
   {
     tab: 'showcase-settings',
     label: 'ویترین و کاتالوگ همکاران',
