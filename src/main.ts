@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import 'vazirmatn/Vazirmatn-font-face.css'
 import './index.css'
 import App from './App.vue'
 

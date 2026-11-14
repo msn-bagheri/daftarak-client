@@ -1,6 +1,50 @@
 <template>
   <nav class="mobile-nav glass">
-    <div class="nav-scroller">
+    <!-- Supplier Mode Tabs -->
+    <div v-if="isSupplier" class="nav-scroller">
+      <button 
+        type="button"
+        class="nav-tab" 
+        :class="{ active: currentTab === 'showcase-settings' }"
+        @click="$emit('change-tab', 'showcase-settings')"
+      >
+        <Globe :size="16" />
+        <span>ویترین من</span>
+      </button>
+
+      <button 
+        type="button"
+        class="nav-tab" 
+        :class="{ active: currentTab === 'catalog' }"
+        @click="$emit('change-tab', 'catalog')"
+      >
+        <Package :size="16" />
+        <span>کالاها و انبار</span>
+      </button>
+
+      <button 
+        type="button"
+        class="nav-tab" 
+        :class="{ active: currentTab === 'workflow' }"
+        @click="$emit('change-tab', 'workflow')"
+      >
+        <LayoutDashboard :size="16" />
+        <span>میز کار</span>
+      </button>
+
+      <button 
+        type="button"
+        class="nav-tab" 
+        :class="{ active: currentTab === 'sync' }"
+        @click="$emit('change-tab', 'sync')"
+      >
+        <FileSpreadsheet :size="16" />
+        <span>آپدیت اکسل</span>
+      </button>
+    </div>
+
+    <!-- Merchant Mode Tabs -->
+    <div v-else class="nav-scroller">
       <button 
         type="button"
         class="nav-tab" 
@@ -54,16 +98,6 @@
       <button 
         type="button"
         class="nav-tab" 
-        :class="{ active: currentTab === 'showcase-settings' }"
-        @click="$emit('change-tab', 'showcase-settings')"
-      >
-        <Globe :size="16" />
-        <span>ویترین من</span>
-      </button>
-
-      <button 
-        type="button"
-        class="nav-tab" 
         :class="{ active: currentTab === 'workflow' }"
         @click="$emit('change-tab', 'workflow')"
       >
@@ -95,6 +129,7 @@ import {
   Truck,
   Globe,
 } from 'lucide-vue-next';
+import { useUserRole } from '../../composables/useUserRole';
 import type { NavTab } from '../../App.vue';
 
 defineProps<{
@@ -104,6 +139,8 @@ defineProps<{
 defineEmits<{
   (e: 'change-tab', tab: NavTab): void;
 }>();
+
+const { isSupplier } = useUserRole();
 </script>
 
 <style scoped>

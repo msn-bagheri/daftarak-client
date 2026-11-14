@@ -28,16 +28,29 @@
     <div class="flex items-center gap-3 justify-between sm:justify-end">
       
       <!-- In-Stock Only Switch -->
-      <label class="flex items-center gap-2 cursor-pointer select-none text-xs font-bold text-slate-700">
-        <input
-          :checked="onlyInStock"
-          type="checkbox"
-          class="sr-only peer"
-          @change="$emit('update:onlyInStock', ($event.target as HTMLInputElement).checked)"
-        />
-        <div class="w-8 h-4.5 bg-slate-200 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:right-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-emerald-600 relative"></div>
-        <span>فقط کالاهای موجود</span>
-      </label>
+      <button
+        type="button"
+        role="switch"
+        :aria-checked="onlyInStock"
+        class="flex items-center gap-2 cursor-pointer select-none group"
+        @click="$emit('update:onlyInStock', !onlyInStock)"
+      >
+        <div
+          dir="ltr"
+          class="w-9 h-5 rounded-full transition-colors duration-200 ease-in-out p-0.5 flex items-center border"
+          :class="onlyInStock 
+            ? 'bg-emerald-600 border-emerald-600' 
+            : 'bg-slate-300 hover:bg-slate-400/80 border-slate-400'"
+        >
+          <div
+            class="w-4 h-4 bg-white rounded-full shadow-md border border-slate-200/60 transform transition-transform duration-200 ease-in-out"
+            :class="onlyInStock ? 'translate-x-4' : 'translate-x-0'"
+          ></div>
+        </div>
+        <span class="text-xs font-bold text-slate-700 group-hover:text-slate-900 transition-colors">
+          فقط کالاهای موجود
+        </span>
+      </button>
 
       <span class="text-slate-300">|</span>
 

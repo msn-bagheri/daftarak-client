@@ -69,13 +69,26 @@
       <div class="sidebar-tenant-section">
         <div v-if="!isSidebarCollapsed" class="tenant-expanded-box">
           <div class="tenant-top-row">
-            <span class="tenant-heading">فروشگاه متصل</span>
-            <span class="pulse-indicator" title="ارتباط زنده با ووکامرس">
+            <span class="tenant-heading">{{ isSupplier ? 'ویترین من' : 'فروشگاه متصل' }}</span>
+            <span class="pulse-indicator" :title="isSupplier ? 'کاتالوگ همکاران فعال است' : 'ارتباط زنده با ووکامرس'">
               <span class="pulse-circle"></span>
-              <span class="pulse-text">متصل</span>
+              <span class="pulse-text">{{ isSupplier ? 'آماده' : 'متصل' }}</span>
             </span>
           </div>
-          <div class="tenant-single-store-display" @click="navigateTo('sync-engine')">
+          <div 
+            v-if="isSupplier" 
+            class="tenant-single-store-display cursor-pointer" 
+            title="مشاهده تنظیمات ویترین اختصاصی"
+            @click="navigateTo('showcase-settings')"
+          >
+            <Globe :size="16" class="text-indigo-600 shrink-0" />
+            <span class="tenant-store-name truncate">ویترین اختصاصی فعال</span>
+          </div>
+          <div 
+            v-else 
+            class="tenant-single-store-display" 
+            @click="navigateTo('sync-engine')"
+          >
             <Store :size="16" class="text-blue-600 shrink-0" />
             <span class="tenant-store-name truncate">{{ activeStoreName }}</span>
           </div>
@@ -86,16 +99,63 @@
           v-else 
           type="button"
           class="tenant-mini-pill"
-          :title="`فروشگاه من: ${activeStoreName}`"
-          @click="navigateTo('sync-engine')"
+          :title="isSupplier ? 'ویترین من' : `فروشگاه من: ${activeStoreName}`"
+          @click="navigateTo(isSupplier ? 'showcase-settings' : 'sync-engine')"
         >
-          <Store :size="18" class="text-blue" />
+          <component :is="isSupplier ? Globe : Store" :size="18" class="text-blue" />
           <span class="tenant-mini-dot"></span>
         </button>
       </div>
 
-      <!-- Navigation Links List -->
-      <nav class="sidebar-nav">
+      <!-- Navigation Links List: Mode A (Supplier / Wholesaler) -->
+      <nav v-if="isSupplier" class="sidebar-nav">
+        <div v-if="!isSidebarCollapsed" class="nav-section-label">
+          <span>انبار و ویترین عمده‌فروشی</span>
+        </div>
+
+        <ul class="nav-list">
+          <li 
+            v-for="item in supplierMenuItems" 
+            :key="item.tab"
+            class="nav-item"
+          >
+            <button 
+              type="button"
+              class="nav-btn"
+              :class="{ 'is-active': currentTab === item.tab }"
+              :title="isSidebarCollapsed ? item.label : undefined"
+              @click="navigateTo(item.tab)"
+            >
+              <div class="nav-icon-wrap" :class="`icon-theme-${item.color}`">
+                <component :is="item.icon" :size="18" />
+              </div>
+
+              <div v-show="!isSidebarCollapsed" class="nav-label-group">
+                <span class="nav-title">{{ item.label }}</span>
+                <span class="nav-desc">{{ item.description }}</span>
+              </div>
+
+              <span 
+                v-if="!isSidebarCollapsed && item.badge" 
+                class="badge nav-badge"
+                :class="item.badgeClass || 'badge-neutral'"
+              >
+                {{ item.badge }}
+              </span>
+
+              <span v-if="currentTab === item.tab" class="active-indicator-bar"></span>
+            </button>
+
+            <div v-if="isSidebarCollapsed" class="collapsed-nav-tooltip desktop-only">
+              <span class="tooltip-title">{{ item.label }}</span>
+              <span class="tooltip-desc">{{ item.description }}</span>
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Navigation Links List: Mode B (Merchant Pipeline) -->
+      <nav v-else class="sidebar-nav">
         <div v-if="!isSidebarCollapsed" class="nav-section-label">
           <span>مراحل گام‌به‌گام راه‌اندازی</span>
         </div>
@@ -243,6 +303,7 @@ import {
   Globe,
 } from 'lucide-vue-next';
 import { useLayout } from '../../composables/useLayout';
+import { useUserRole } from '../../composables/useUserRole';
 import type { NavTab } from '../../App.vue';
 
 interface NavMenuItem {
@@ -271,6 +332,41 @@ const {
   toggleSidebar,
   closeMobileMenu,
 } = useLayout();
+
+const { isSupplier } = useUserRole();
+
+const supplierMenuItems: NavMenuItem[] = [
+  {
+    tab: 'showcase-settings',
+    label: 'ویترین و کاتالوگ همکاران',
+    description: 'لینک اختصاصی، تلفن و تنظیم قیمت',
+    icon: Globe,
+    color: 'pink',
+    badge: 'فعال',
+    badgeClass: 'badge-pink',
+  },
+  {
+    tab: 'catalog',
+    label: 'کالاها و انبار عمده',
+    description: 'مشاهده موجودی و قیمت اقلام',
+    icon: Package,
+    color: 'blue',
+  },
+  {
+    tab: 'workflow',
+    label: 'میز کار و پایش کاتالوگ',
+    description: 'گزارش و وضعیت کاتالوگ شما',
+    icon: LayoutDashboard,
+    color: 'purple',
+  },
+  {
+    tab: 'sync',
+    label: 'به‌روزرسانی با اکسل',
+    description: 'بارگذاری سریع فایل اکسل جدید',
+    icon: FileSpreadsheet,
+    color: 'green',
+  },
+];
 
 const stepItems: NavMenuItem[] = [
   {
@@ -317,15 +413,6 @@ const generalItems: NavMenuItem[] = [
     description: 'پایش تغییرات و گزارش سیستم',
     icon: LayoutDashboard,
     color: 'blue',
-  },
-  {
-    tab: 'showcase-settings',
-    label: 'ویترین و کاتالوگ همکاران',
-    description: 'لینک اختصاصی سفارش‌گیری تلفنی',
-    icon: Globe,
-    color: 'pink',
-    badge: 'جدید',
-    badgeClass: 'badge-pink',
   },
   {
     tab: 'sync',

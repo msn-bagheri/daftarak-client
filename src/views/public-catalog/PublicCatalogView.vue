@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-slate-50 flex flex-col font-sans select-text pb-20">
+  <div class="public-catalog-root min-h-screen bg-slate-50 flex flex-col select-text pb-20" dir="rtl">
     
     <!-- Top Header with Supplier Brand and Direct Call Button -->
     <CatalogHeader :profile="profile" />
@@ -167,4 +167,10 @@ function resetFilters() {
   sortBy.value = 'newest';
 }
 </script>
+
+<style scoped>
+.public-catalog-root {
+  font-family: 'Vazirmatn', system-ui, -apple-system, sans-serif !important;
+}
+</style>
 

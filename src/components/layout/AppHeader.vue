@@ -28,10 +28,37 @@
       </div>
 
       <div class="header-actions">
-        <!-- Connected Store Badge -->
-        <div class="tenant-scope-pill" :title="`فروشگاه متصل: ${currentTenant.name}`">
+        <!-- Adaptive Role Switcher Pill -->
+        <button
+          type="button"
+          class="role-switcher-pill"
+          :title="`حالت فعلی: ${roleTitleFa} (کلیک برای سوئیچ به حالت دیگر)`"
+          @click="handleRoleToggle"
+        >
+          <div class="role-icon-box" :class="isSupplier ? 'is-supplier' : 'is-merchant'">
+            <component :is="isSupplier ? Truck : Store" :size="13" />
+          </div>
+          <span class="role-pill-text">{{ isSupplier ? 'حالت عمده‌فروش' : 'حالت فروشگاه‌دار' }}</span>
+          <ArrowLeftRight :size="11" class="role-toggle-icon" />
+        </button>
+
+        <!-- Connected Store Badge (For Merchant) or Showcase Shortcut (For Supplier) -->
+        <div 
+          v-if="isMerchant" 
+          class="tenant-scope-pill" 
+          :title="`فروشگاه متصل: ${currentTenant.name}`"
+        >
           <Store :size="14" class="text-blue" />
           <span class="tenant-scope-name">{{ currentTenant.name }}</span>
+        </div>
+        <div 
+          v-else 
+          class="tenant-scope-pill cursor-pointer hover:bg-slate-100" 
+          title="مشاهده تنظیمات ویترین و کاتالوگ"
+          @click="$emit('change-tab', 'showcase-settings')"
+        >
+          <Globe :size="14" class="text-indigo-600" />
+          <span class="tenant-scope-name">ویترین فعال</span>
         </div>
 
         <!-- User Profile & Auth Status -->
@@ -70,10 +97,11 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { Menu, Store, User, LogOut } from 'lucide-vue-next';
+import { Menu, Store, Truck, Globe, ArrowLeftRight, User, LogOut } from 'lucide-vue-next';
 import DaftarakLogo from '../brand/DaftarakLogo.vue';
 import { useLayout } from '../../composables/useLayout';
 import { useAuth } from '../../composables/useAuth';
+import { useUserRole, type UserRole } from '../../composables/useUserRole';
 import type { NavTab } from '../../App.vue';
 
 const props = defineProps<{
@@ -83,10 +111,17 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: 'change-tab', tab: NavTab): void;
   (e: 'open-auth'): void;
+  (e: 'role-changed', role: UserRole): void;
 }>();
 
 const { isSidebarCollapsed, currentTenant, toggleSidebar, toggleMobileMenu } = useLayout();
 const { currentUser, isAuthenticated, logout } = useAuth();
+const { isMerchant, isSupplier, roleTitleFa, toggleRole } = useUserRole();
+
+function handleRoleToggle() {
+  const nextRole = toggleRole();
+  emit('role-changed', nextRole);
+}
 
 const moduleMetaMap: Record<NavTab, { title: string; badge: string }> = {
   landing: { title: 'معرفی سامانه', badge: 'صفحه اصلی' },
@@ -361,5 +396,56 @@ async function handleLogout() {
 
 .header-logout-btn:hover {
   color: #f43f5e;
+}
+
+.role-switcher-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: var(--text-main);
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.role-switcher-pill:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
+}
+
+.role-icon-box {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.role-icon-box.is-merchant {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.role-icon-box.is-supplier {
+  background: #eef2ff;
+  color: #4f46e5;
+}
+
+.role-toggle-icon {
+  color: #94a3b8;
+  transition: transform 0.2s;
+}
+
+.role-switcher-pill:hover .role-toggle-icon {
+  color: #475569;
+  transform: rotate(180deg);
 }
 </style>

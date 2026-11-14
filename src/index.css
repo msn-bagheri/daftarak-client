@@ -82,6 +82,10 @@ body {
 }
 
 /* Force all form controls, typography and interactive elements to strictly inherit Vazirmatn */
+*,
+html,
+body,
+#app,
 button,
 input,
 optgroup,
@@ -90,6 +94,7 @@ textarea,
 h1, h2, h3, h4, h5, h6,
 p, span, a, label, li,
 table, th, td,
+div,
 .font-sans,
 [class*="font-sans"] {
   font-family: var(--font-family) !important;

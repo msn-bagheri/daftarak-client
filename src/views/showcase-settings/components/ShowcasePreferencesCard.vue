@@ -16,14 +16,26 @@
           </p>
         </div>
 
-        <label class="relative inline-flex items-center cursor-pointer shrink-0">
-          <input
-            v-model="profile.showPrices"
-            type="checkbox"
-            class="sr-only peer"
-          />
-          <div class="w-11 h-6 bg-slate-200 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:right-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-        </label>
+        <button
+          type="button"
+          role="switch"
+          :aria-checked="profile.showPrices"
+          class="cursor-pointer select-none focus:outline-hidden"
+          @click="profile.showPrices = !profile.showPrices"
+        >
+          <div
+            dir="ltr"
+            class="w-11 h-6 rounded-full transition-colors duration-200 ease-in-out p-0.5 flex items-center border"
+            :class="profile.showPrices 
+              ? 'bg-blue-600 border-blue-600' 
+              : 'bg-slate-300 hover:bg-slate-400/80 border-slate-400'"
+          >
+            <div
+              class="w-5 h-5 bg-white rounded-full shadow-md border border-slate-200/60 transform transition-transform duration-200 ease-in-out"
+              :class="profile.showPrices ? 'translate-x-5' : 'translate-x-0'"
+            ></div>
+          </div>
+        </button>
       </div>
 
       <!-- Option 2: Allow Inquiry Order List -->
@@ -35,14 +47,26 @@
           </p>
         </div>
 
-        <label class="relative inline-flex items-center cursor-pointer shrink-0">
-          <input
-            v-model="profile.allowInquiryList"
-            type="checkbox"
-            class="sr-only peer"
-          />
-          <div class="w-11 h-6 bg-slate-200 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:right-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-        </label>
+        <button
+          type="button"
+          role="switch"
+          :aria-checked="profile.allowInquiryList"
+          class="cursor-pointer select-none focus:outline-hidden"
+          @click="profile.allowInquiryList = !profile.allowInquiryList"
+        >
+          <div
+            dir="ltr"
+            class="w-11 h-6 rounded-full transition-colors duration-200 ease-in-out p-0.5 flex items-center border"
+            :class="profile.allowInquiryList 
+              ? 'bg-blue-600 border-blue-600' 
+              : 'bg-slate-300 hover:bg-slate-400/80 border-slate-400'"
+          >
+            <div
+              class="w-5 h-5 bg-white rounded-full shadow-md border border-slate-200/60 transform transition-transform duration-200 ease-in-out"
+              :class="profile.allowInquiryList ? 'translate-x-5' : 'translate-x-0'"
+            ></div>
+          </div>
+        </button>
       </div>
 
     </div>

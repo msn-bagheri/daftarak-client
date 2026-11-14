@@ -20,6 +20,7 @@
         :current-tab="currentTab" 
         @change-tab="setTab" 
         @open-auth="openAuth('login')"
+        @role-changed="handleHeaderRoleChanged"
       />
 
       <main class="main-content" :class="{ 'landing-main': isPublicView }">
@@ -72,6 +73,13 @@
       @close="showAuthModal = false"
       @success="handleAuthSuccess"
     />
+
+    <!-- Role Onboarding Modal (First time persona selection) -->
+    <RoleOnboardingModal
+      v-if="showRoleModal"
+      :initial-role="currentRole"
+      @complete="handleRoleOnboardingComplete"
+    />
   </div>
 </template>
 
@@ -84,6 +92,8 @@ import SideMenu from './components/layout/SideMenu.vue';
 import AppHeader from './components/layout/AppHeader.vue';
 import MobileNav from './components/layout/MobileNav.vue';
 import AuthModal from './components/auth/AuthModal.vue';
+import RoleOnboardingModal from './components/auth/RoleOnboardingModal.vue';
+import { useUserRole, type UserRole } from './composables/useUserRole';
 
 // Views
 import LandingPageView from './views/landing-page/LandingPageView.vue';
@@ -140,6 +150,7 @@ const isPublicView = computed(() => currentTab.value === 'landing' || currentTab
 const showAuthModal = ref<boolean>(false);
 const authModalMode = ref<'login' | 'register'>('register');
 const { isSidebarCollapsed } = useLayout();
+const { currentRole, hasChosenRole, showRoleModal, completeRoleOnboarding, openRoleModal } = useUserRole();
 
 function openAuth(mode: 'login' | 'register' = 'register') {
   authModalMode.value = mode;
@@ -159,10 +170,39 @@ function setTab(tab: NavTab) {
 
 function handleAuthSuccess() {
   showAuthModal.value = false;
-  // Transition directly into dashboard after successful signup/login
-  currentTab.value = 'workflow';
-  window.location.hash = 'workflow';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // If user hasn't completed 1-step persona onboarding, show friendly role welcome modal
+  if (!hasChosenRole.value) {
+    openRoleModal();
+  } else {
+    // Navigate based on their role
+    if (currentRole.value === 'supplier') {
+      setTab('showcase-settings');
+    } else {
+      setTab('workflow');
+    }
+  }
+}
+
+function handleRoleOnboardingComplete(role: UserRole) {
+  completeRoleOnboarding(role);
+  if (role === 'supplier') {
+    setTab('showcase-settings');
+  } else {
+    setTab('workflow');
+  }
+}
+
+function handleHeaderRoleChanged(newRole: UserRole) {
+  if (newRole === 'supplier') {
+    const merchantTabs: NavTab[] = ['sync-engine', 'suppliers', 'category-mapper', 'transformations', 'publishing'];
+    if (merchantTabs.includes(currentTab.value)) {
+      setTab('showcase-settings');
+    }
+  } else {
+    if (currentTab.value === 'showcase-settings') {
+      setTab('workflow');
+    }
+  }
 }
 
 window.addEventListener('hashchange', () => {
