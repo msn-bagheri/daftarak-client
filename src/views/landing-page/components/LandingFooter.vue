@@ -5,12 +5,16 @@
       <div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-slate-100">
         
         <!-- Brand Info -->
-        <DaftarakLogo 
-          size="sm" 
-          variant="horizontal" 
-          show-subtitle 
-          tagline="موتور هوشمند همگام‌سازی و قیمت‌گذاری چندکاناله" 
-        />
+        <div class="flex flex-col items-center sm:items-start gap-2">
+          <DaftarakLogo 
+            size="md" 
+            variant="horizontal" 
+            :show-persian-name="true" 
+          />
+          <p class="text-xs text-slate-500 font-medium">
+            سامانه هوشمند همگام‌سازی کاتالوگ و به‌روزرسانی قیمت‌های ووکامرس
+          </p>
+        </div>
 
         <!-- Quick Links -->
         <div class="flex flex-wrap items-center justify-center gap-6 text-xs sm:text-sm font-medium">

@@ -22,10 +22,7 @@
         <DaftarakLogo 
           size="md" 
           variant="horizontal" 
-          show-badge 
-          badge-text="نسخه ابری" 
-          show-subtitle 
-          tagline="پلتفرم کاتالوگ و انبار" 
+          :show-persian-name="true"
           clickable 
           @click="navigateTo('workflow')" 
         />

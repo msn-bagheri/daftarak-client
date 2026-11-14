@@ -6,10 +6,9 @@
       <DaftarakLogo 
         size="md" 
         variant="horizontal" 
-        show-badge 
-        badge-text="همگام‌ساز هوشمند" 
-        show-subtitle 
-        tagline="هماهنگی خودکار ووکامرس" 
+        :show-persian-name="true"
+        clickable
+        @click="$emit('navigate', 'landing')" 
       />
 
       <!-- Navigation Links -->
