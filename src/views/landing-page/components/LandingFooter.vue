@@ -30,6 +30,28 @@
           </button>
         </div>
 
+        <!-- Enamad Trust Seal Badge -->
+        <div class="flex items-center justify-center">
+          <div class="p-2 bg-slate-50 hover:bg-slate-100/80 border border-slate-200/90 rounded-2xl shadow-2xs hover:shadow-md transition-all flex items-center justify-center">
+            <a 
+              referrerpolicy="origin" 
+              target="_blank" 
+              href="https://trustseal.enamad.ir/?id=8813716&Code=90VrQ3SEXBWLMqLLWOtZe5YGdiM3Ndvo"
+              title="نماد اعتماد الکترونیکی دفترک"
+              class="block"
+            >
+              <img 
+                referrerpolicy="origin" 
+                src="https://trustseal.enamad.ir/logo.aspx?id=8813716&Code=90VrQ3SEXBWLMqLLWOtZe5YGdiM3Ndvo" 
+                alt="نماد اعتماد الکترونیکی دفترک" 
+                style="cursor:pointer" 
+                code="90VrQ3SEXBWLMqLLWOtZe5YGdiM3Ndvo"
+                class="w-16 h-16 sm:w-20 sm:h-20 object-contain select-none"
+              />
+            </a>
+          </div>
+        </div>
+
       </div>
 
       <!-- Copyright & Version -->
