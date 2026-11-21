@@ -16,6 +16,7 @@
         <a href="#features" class="hover:text-blue-600 transition-colors">قابلیت‌ها</a>
         <a href="#channels" class="hover:text-blue-600 transition-colors">کانال‌های متصل</a>
         <a href="#why-daftarak" class="hover:text-blue-600 transition-colors">چرا دفترک؟</a>
+        <a href="#pricing" class="hover:text-blue-600 transition-colors font-bold text-slate-800">تعرفه‌ها و پلن‌ها</a>
         <button 
           type="button" 
           class="hover:text-blue-600 transition-colors cursor-pointer text-slate-600 font-medium"
@@ -23,7 +24,7 @@
         >
           ویترین همکاران
         </button>
-        <a href="#cta" class="hover:text-pink-600 transition-colors font-semibold">آزمایش رایگان</a>
+        <a href="#pricing" class="hover:text-pink-600 transition-colors font-semibold">آزمایش رایگان</a>
       </nav>
 
       <!-- Action Section: Logged-in Dropdown OR Guest Auth Buttons -->

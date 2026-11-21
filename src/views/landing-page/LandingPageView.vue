@@ -30,6 +30,11 @@
         @open-auth="mode => $emit('open-auth', mode)"
       />
 
+      <!-- Pricing & Subscription Plans (Shaparak Compliance) -->
+      <PricingPlansSection
+        @open-auth="mode => $emit('open-auth', mode)"
+      />
+
       <!-- High-Converting CTA Banner -->
       <ConversionCta
         @navigate="handleNavigate"
@@ -55,6 +60,7 @@ import LandingHero from './components/LandingHero.vue';
 import MarketplaceStrip from './components/MarketplaceStrip.vue';
 import FeatureHighlights from './components/FeatureHighlights.vue';
 import WhyDaftarakSection from './components/WhyDaftarakSection.vue';
+import PricingPlansSection from './components/PricingPlansSection.vue';
 import ConversionCta from './components/ConversionCta.vue';
 import LandingFooter from './components/LandingFooter.vue';
 
